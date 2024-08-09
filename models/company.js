@@ -75,6 +75,15 @@ class Company {
       whereExpressions.push(`num_employees <= $${queryValues.length}`);
     }
 
+    if (name) {
+      queryValues.push(`%${name}%`);
+      whereExpressions.push(`name LIKE $${queryValues.length}`);
+    }
+
+    if (whereExpressions.length > 0) {
+      query += " WHERE " + whereExpressions.join(" AND ");
+    }
+
     return companiesRes.rows;
   }
 
