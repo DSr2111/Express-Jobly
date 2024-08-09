@@ -59,6 +59,11 @@ class Company {
 
     const { minEmployees, maxEmployees, name } = searchFilters;
 
+    if (minEmployees > maxEmployees) {
+      throw new BadRequestError(
+        "Minimum employees cannot be greater than maximum"
+      );
+    }
     return companiesRes.rows;
   }
 
