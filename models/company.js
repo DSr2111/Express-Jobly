@@ -64,6 +64,17 @@ class Company {
         "Minimum employees cannot be greater than maximum"
       );
     }
+
+    if (minEmployees !== undefined) {
+      queryValues.push(minEmployees);
+      whereExpressions.push(`num_employees >= $${queryValues.length}`);
+    }
+
+    if (maxEmployees !== undefined) {
+      queryValues.push(maxEmployees);
+      whereExpressions.push(`num_employees <= $${queryValues.length}`);
+    }
+
     return companiesRes.rows;
   }
 
