@@ -54,6 +54,17 @@ router.get("/", async function (req, res, next) {
 
   if (q.minEmployees !== undefined) q.minEmployees = +minEmployees;
   if (q.maxEmployees !== undefined) q.maxEmployees = +maxEmployees;
+
+  try {
+    const validator = jema.validate(q, companySearchSchema);
+
+    if (!validator.valid) {
+      const errs = validator.errors.map((e) => e.stack);
+      throw new BadRequestError(errs);
+    }
+  } catch (err) {
+    return next(err);
+  }
 });
 
 router.get("/", async function (req, res, next) {
