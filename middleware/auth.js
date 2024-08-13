@@ -60,4 +60,5 @@ function ensureAdmin(req, res, next) {
 module.exports = {
   authenticateJWT,
   ensureLoggedIn,
+  ensureAdmin,
 };
