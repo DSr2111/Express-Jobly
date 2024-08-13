@@ -50,14 +50,12 @@ class Company {
    * */
 
   static async findAll(searchFilters = {}) {
-    const companiesRes = await db.query(
-      `SELECT handle,
+    let query = `SELECT handle,
                   name,
                   description,
                   num_employees AS "numEmployees",
                   logo_url AS "logoUrl"
-           FROM companies`
-    );
+           FROM companies`;
 
     let whereExpressions = [];
     let queryValues = [];
@@ -89,6 +87,8 @@ class Company {
       query += " WHERE " + whereExpressions.join(" AND ");
     }
 
+    query += " ORDER BY name";
+    const companiesRes = await db.query(query, queryValues);
     return companiesRes.rows;
   }
 
