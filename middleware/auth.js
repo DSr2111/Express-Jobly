@@ -57,6 +57,15 @@ function ensureAdmin(req, res, next) {
   }
 }
 
+function ensureCorrectUserOrAdmin(req, res, next) {
+  try {
+    const user = user.locals.user;
+    if(user && (user.isAdmin || user.username))
+  } catch (err) {
+    return next(err);
+  }
+}
+
 module.exports = {
   authenticateJWT,
   ensureLoggedIn,
