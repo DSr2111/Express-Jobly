@@ -16,3 +16,5 @@ class Job {
 
   static async remove(id) {}
 }
+
+module.exports = Job;
