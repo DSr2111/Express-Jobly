@@ -4,8 +4,9 @@
 
 const express = require("express");
 const Job = require("../models/job");
+const { ensureAdmin } = require("../middleware/auth");
 
-router.post("/", async function (req, res, next) {
+router.post("/", ensureAdmin, async function (req, res, next) {
   try {
   } catch (err) {
     return next(err);
@@ -19,14 +20,14 @@ router.get("/", async function (req, res, next) {
   }
 });
 
-router.patch("/:id", async function (req, res, next) {
+router.patch("/:id", ensureAdmin, async function (req, res, next) {
   try {
   } catch (err) {
     return next(err);
   }
 });
 
-router.delete("/:id", async function (req, res, next) {
+router.delete("/:id", ensureAdmin, async function (req, res, next) {
   try {
   } catch (err) {
     return next(err);
